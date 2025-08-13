@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dehub-dal</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>The Dataelement Hub Data Access Layer</name>
     <description>The Dataelement Hub Data Access Layer used by the REST interface and the Dataelement Hub frontend</description>
@@ -20,11 +20,11 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <db.host></db.host>
-                <db.port></db.port>
-                <db.name></db.name>
-                <db.user></db.user>
-                <db.password></db.password>
+                <db.host>localhost</db.host>
+                <db.port>5432</db.port>
+                <db.name>dehubdb</db.name>
+                <db.user>dehubuser</db.user>
+                <db.password>userpasswort</db.password>
             </properties>
         </profile>
     </profiles>
