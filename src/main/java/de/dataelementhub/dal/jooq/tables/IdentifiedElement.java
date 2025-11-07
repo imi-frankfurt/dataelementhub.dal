@@ -165,6 +165,12 @@ public class IdentifiedElement extends TableImpl<IdentifiedElementRecord> {
      */
     public final TableField<IdentifiedElementRecord, String> EXTERNAL_ID = createField(DSL.name("external_id"), SQLDataType.CLOB, this, "");
 
+    /**
+     * The column
+     * <code>public.identified_element.defined_permitted_value</code>.
+     */
+    public final TableField<IdentifiedElementRecord, String> DEFINED_PERMITTED_VALUE = createField(DSL.name("defined_permitted_value"), SQLDataType.CLOB, this, "");
+
     private IdentifiedElement(Name alias, Table<IdentifiedElementRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -194,7 +200,8 @@ public class IdentifiedElement extends TableImpl<IdentifiedElementRecord> {
          e.permitted_value,
          e.data,
          e.uuid,
-         e.external_id
+         e.external_id,
+         e.defined_permitted_value
         FROM ((scoped_identifier si
           LEFT JOIN element ns ON ((si.namespace_id = ns.id)))
           LEFT JOIN element e ON ((e.id = si.element_id)));

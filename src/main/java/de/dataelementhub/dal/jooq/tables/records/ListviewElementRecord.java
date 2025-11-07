@@ -373,6 +373,20 @@ public class ListviewElementRecord extends TableRecordImpl<ListviewElementRecord
         return (String) get(24);
     }
 
+    /**
+     * Setter for <code>public.listview_element.defined_permitted_value</code>.
+     */
+    public void setDefinedPermittedValue(String value) {
+        set(25, value);
+    }
+
+    /**
+     * Getter for <code>public.listview_element.defined_permitted_value</code>.
+     */
+    public String getDefinedPermittedValue() {
+        return (String) get(25);
+    }
+
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -387,7 +401,7 @@ public class ListviewElementRecord extends TableRecordImpl<ListviewElementRecord
     /**
      * Create a detached, initialised ListviewElementRecord
      */
-    public ListviewElementRecord(Integer siId, Integer siIdentifier, Integer siVersion, Status siStatus, Integer siNamespaceId, String vdDatatype, Integer id, ElementType elementType, Boolean hidden, Integer createdBy, Integer elementId, Integer scopedIdentifierId, String code, Boolean isValid, String format, String datatype, String unitOfMeasure, Integer maximumCharacters, String description, ValidationType validationType, String validationData, String permittedValue, JSON data, UUID uuid, String externalId) {
+    public ListviewElementRecord(Integer siId, Integer siIdentifier, Integer siVersion, Status siStatus, Integer siNamespaceId, String vdDatatype, Integer id, ElementType elementType, Boolean hidden, Integer createdBy, Integer elementId, Integer scopedIdentifierId, String code, Boolean isValid, String format, String datatype, String unitOfMeasure, Integer maximumCharacters, String description, ValidationType validationType, String validationData, String permittedValue, JSON data, UUID uuid, String externalId, String definedPermittedValue) {
         super(ListviewElement.LISTVIEW_ELEMENT);
 
         setSiId(siId);
@@ -415,6 +429,7 @@ public class ListviewElementRecord extends TableRecordImpl<ListviewElementRecord
         setData(data);
         setUuid(uuid);
         setExternalId(externalId);
+        setDefinedPermittedValue(definedPermittedValue);
     }
 
     /**
@@ -449,6 +464,7 @@ public class ListviewElementRecord extends TableRecordImpl<ListviewElementRecord
             setData(value.getData());
             setUuid(value.getUuid());
             setExternalId(value.getExternalId());
+            setDefinedPermittedValue(value.getDefinedPermittedValue());
         }
     }
 }

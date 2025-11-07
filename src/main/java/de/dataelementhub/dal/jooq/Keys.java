@@ -4,6 +4,7 @@
 package de.dataelementhub.dal.jooq;
 
 
+import de.dataelementhub.dal.jooq.tables.CodeSystem;
 import de.dataelementhub.dal.jooq.tables.ConceptElementAssociations;
 import de.dataelementhub.dal.jooq.tables.Concepts;
 import de.dataelementhub.dal.jooq.tables.Config;
@@ -20,7 +21,10 @@ import de.dataelementhub.dal.jooq.tables.Source;
 import de.dataelementhub.dal.jooq.tables.Staging;
 import de.dataelementhub.dal.jooq.tables.UserNamespaceAccess;
 import de.dataelementhub.dal.jooq.tables.UserSourceCredentials;
+import de.dataelementhub.dal.jooq.tables.ValueDomainDefinedPermissibleValue;
 import de.dataelementhub.dal.jooq.tables.ValueDomainPermissibleValue;
+import de.dataelementhub.dal.jooq.tables.ValueDomainReference;
+import de.dataelementhub.dal.jooq.tables.records.CodeSystemRecord;
 import de.dataelementhub.dal.jooq.tables.records.ConceptElementAssociationsRecord;
 import de.dataelementhub.dal.jooq.tables.records.ConceptsRecord;
 import de.dataelementhub.dal.jooq.tables.records.ConfigRecord;
@@ -37,7 +41,9 @@ import de.dataelementhub.dal.jooq.tables.records.SourceRecord;
 import de.dataelementhub.dal.jooq.tables.records.StagingRecord;
 import de.dataelementhub.dal.jooq.tables.records.UserNamespaceAccessRecord;
 import de.dataelementhub.dal.jooq.tables.records.UserSourceCredentialsRecord;
+import de.dataelementhub.dal.jooq.tables.records.ValueDomainDefinedPermissibleValueRecord;
 import de.dataelementhub.dal.jooq.tables.records.ValueDomainPermissibleValueRecord;
+import de.dataelementhub.dal.jooq.tables.records.ValueDomainReferenceRecord;
 
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -57,6 +63,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<CodeSystemRecord> CODE_SYSTEM_PKEY = Internal.createUniqueKey(CodeSystem.CODE_SYSTEM, DSL.name("code_system_pkey"), new TableField[] { CodeSystem.CODE_SYSTEM.ID }, true);
+    public static final UniqueKey<CodeSystemRecord> CODE_SYSTEM_SOURCE_ID_VERSION_KEY = Internal.createUniqueKey(CodeSystem.CODE_SYSTEM, DSL.name("code_system_source_id_version_key"), new TableField[] { CodeSystem.CODE_SYSTEM.SOURCE_ID, CodeSystem.CODE_SYSTEM.VERSION }, true);
     public static final UniqueKey<ConceptElementAssociationsRecord> CONCEPT_ELEMENT_ASSOCIATIONS_PKEY = Internal.createUniqueKey(ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS, DSL.name("concept_element_associations_pkey"), new TableField[] { ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS.CONCEPT_ID, ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS.SCOPEDIDENTIFIER_ID }, true);
     public static final UniqueKey<ConceptsRecord> CONCEPTS_PKEY = Internal.createUniqueKey(Concepts.CONCEPTS, DSL.name("concepts_pkey"), new TableField[] { Concepts.CONCEPTS.ID }, true);
     public static final UniqueKey<ConceptsRecord> CONCEPTS_SOURCE_ID_SYSTEM_VERSION_TERM_TEXT_KEY = Internal.createUniqueKey(Concepts.CONCEPTS, DSL.name("concepts_source_id_system_version_term_text_key"), new TableField[] { Concepts.CONCEPTS.SOURCE_ID, Concepts.CONCEPTS.SYSTEM, Concepts.CONCEPTS.VERSION, Concepts.CONCEPTS.TERM, Concepts.CONCEPTS.TEXT }, true);
@@ -80,11 +88,13 @@ public class Keys {
     public static final UniqueKey<UserNamespaceAccessRecord> USER_NAMESPACE_ACCESS_UNIQUE = Internal.createUniqueKey(UserNamespaceAccess.USER_NAMESPACE_ACCESS, DSL.name("user_namespace_access_unique"), new TableField[] { UserNamespaceAccess.USER_NAMESPACE_ACCESS.USER_ID, UserNamespaceAccess.USER_NAMESPACE_ACCESS.NAMESPACE_ID }, true);
     public static final UniqueKey<UserSourceCredentialsRecord> CREDENTIALS_UNIQUE = Internal.createUniqueKey(UserSourceCredentials.USER_SOURCE_CREDENTIALS, DSL.name("credentials_unique"), new TableField[] { UserSourceCredentials.USER_SOURCE_CREDENTIALS.USER_ID, UserSourceCredentials.USER_SOURCE_CREDENTIALS.CREDENTIAL, UserSourceCredentials.USER_SOURCE_CREDENTIALS.SOURCE_ID }, true);
     public static final UniqueKey<UserSourceCredentialsRecord> USER_SOURCE_CREDENTIALS_PKEY = Internal.createUniqueKey(UserSourceCredentials.USER_SOURCE_CREDENTIALS, DSL.name("user_source_credentials_pkey"), new TableField[] { UserSourceCredentials.USER_SOURCE_CREDENTIALS.USER_ID, UserSourceCredentials.USER_SOURCE_CREDENTIALS.SOURCE_ID }, true);
+    public static final UniqueKey<ValueDomainReferenceRecord> VALUE_DOMAIN_REFERENCE_PKEY = Internal.createUniqueKey(ValueDomainReference.VALUE_DOMAIN_REFERENCE, DSL.name("value_domain_reference_pkey"), new TableField[] { ValueDomainReference.VALUE_DOMAIN_REFERENCE.CODE_SYSTEM_ID, ValueDomainReference.VALUE_DOMAIN_REFERENCE.SCOPEDIDENTIFIER_ID }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<CodeSystemRecord, SourceRecord> CODE_SYSTEM__SOURCE_ID_FKEY = Internal.createForeignKey(CodeSystem.CODE_SYSTEM, DSL.name("source_id_fkey"), new TableField[] { CodeSystem.CODE_SYSTEM.SOURCE_ID }, Keys.SOURCE_PKEY, new TableField[] { Source.SOURCE.ID }, true);
     public static final ForeignKey<ConceptElementAssociationsRecord, ConceptsRecord> CONCEPT_ELEMENT_ASSOCIATIONS__CONCEPT_ID_FKEY = Internal.createForeignKey(ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS, DSL.name("concept_id_fkey"), new TableField[] { ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS.CONCEPT_ID }, Keys.CONCEPTS_PKEY, new TableField[] { Concepts.CONCEPTS.ID }, true);
     public static final ForeignKey<ConceptElementAssociationsRecord, ScopedIdentifierRecord> CONCEPT_ELEMENT_ASSOCIATIONS__SCOPEDIDENTIFIER_ID_FKEY = Internal.createForeignKey(ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS, DSL.name("scopedidentifier_id_fkey"), new TableField[] { ConceptElementAssociations.CONCEPT_ELEMENT_ASSOCIATIONS.SCOPEDIDENTIFIER_ID }, Keys.SCOPED_IDENTIFIER_PKEY, new TableField[] { ScopedIdentifier.SCOPED_IDENTIFIER.ID }, true);
     public static final ForeignKey<ConceptsRecord, SourceRecord> CONCEPTS__SOURCE_ID_FKEY = Internal.createForeignKey(Concepts.CONCEPTS, DSL.name("source_id_fkey"), new TableField[] { Concepts.CONCEPTS.SOURCE_ID }, Keys.SOURCE_PKEY, new TableField[] { Source.SOURCE.ID }, true);
@@ -108,6 +118,9 @@ public class Keys {
     public static final ForeignKey<UserNamespaceAccessRecord, DehubUserRecord> USER_NAMESPACE_ACCESS__USER_NAMESPACE_ACCESS_USER_FKEY = Internal.createForeignKey(UserNamespaceAccess.USER_NAMESPACE_ACCESS, DSL.name("user_namespace_access_user_fkey"), new TableField[] { UserNamespaceAccess.USER_NAMESPACE_ACCESS.USER_ID }, Keys.DEHUB_USER_PKEY, new TableField[] { DehubUser.DEHUB_USER.ID }, true);
     public static final ForeignKey<UserSourceCredentialsRecord, SourceRecord> USER_SOURCE_CREDENTIALS__SOURCE_ID_FKEY = Internal.createForeignKey(UserSourceCredentials.USER_SOURCE_CREDENTIALS, DSL.name("source_id_fkey"), new TableField[] { UserSourceCredentials.USER_SOURCE_CREDENTIALS.SOURCE_ID }, Keys.SOURCE_PKEY, new TableField[] { Source.SOURCE.ID }, true);
     public static final ForeignKey<UserSourceCredentialsRecord, DehubUserRecord> USER_SOURCE_CREDENTIALS__USER_ID_FKEY = Internal.createForeignKey(UserSourceCredentials.USER_SOURCE_CREDENTIALS, DSL.name("user_id_fkey"), new TableField[] { UserSourceCredentials.USER_SOURCE_CREDENTIALS.USER_ID }, Keys.DEHUB_USER_PKEY, new TableField[] { DehubUser.DEHUB_USER.ID }, true);
+    public static final ForeignKey<ValueDomainDefinedPermissibleValueRecord, ScopedIdentifierRecord> VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE__VALUE_DOMAIN_DEFINED_PERMISSI_DEFINED_PERMISSIBLE_VALUE_SC_FKEY = Internal.createForeignKey(ValueDomainDefinedPermissibleValue.VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE, DSL.name("value_domain_defined_permissi_defined_permissible_value_sc_fkey"), new TableField[] { ValueDomainDefinedPermissibleValue.VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE.DEFINED_PERMISSIBLE_VALUE_SCOPED_IDENTIFIER_ID }, Keys.SCOPED_IDENTIFIER_PKEY, new TableField[] { ScopedIdentifier.SCOPED_IDENTIFIER.ID }, true);
+    public static final ForeignKey<ValueDomainDefinedPermissibleValueRecord, ScopedIdentifierRecord> VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE__VALUE_DOMAIN_DEFINED_PERMISSI_VALUE_DOMAIN_SCOPED_IDENTIFI_FKEY = Internal.createForeignKey(ValueDomainDefinedPermissibleValue.VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE, DSL.name("value_domain_defined_permissi_value_domain_scoped_identifi_fkey"), new TableField[] { ValueDomainDefinedPermissibleValue.VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE.VALUE_DOMAIN_SCOPED_IDENTIFIER_ID }, Keys.SCOPED_IDENTIFIER_PKEY, new TableField[] { ScopedIdentifier.SCOPED_IDENTIFIER.ID }, true);
     public static final ForeignKey<ValueDomainPermissibleValueRecord, ScopedIdentifierRecord> VALUE_DOMAIN_PERMISSIBLE_VALUE__VALUE_DOMAIN_PERMISSIBLE_VALU_PERMISSIBLE_VALUE_SCOPED_IDE_FKEY = Internal.createForeignKey(ValueDomainPermissibleValue.VALUE_DOMAIN_PERMISSIBLE_VALUE, DSL.name("value_domain_permissible_valu_permissible_value_scoped_ide_fkey"), new TableField[] { ValueDomainPermissibleValue.VALUE_DOMAIN_PERMISSIBLE_VALUE.PERMISSIBLE_VALUE_SCOPED_IDENTIFIER_ID }, Keys.SCOPED_IDENTIFIER_PKEY, new TableField[] { ScopedIdentifier.SCOPED_IDENTIFIER.ID }, true);
     public static final ForeignKey<ValueDomainPermissibleValueRecord, ScopedIdentifierRecord> VALUE_DOMAIN_PERMISSIBLE_VALUE__VALUE_DOMAIN_PERMISSIBLE_VALU_VALUE_DOMAIN_SCOPED_IDENTIFI_FKEY = Internal.createForeignKey(ValueDomainPermissibleValue.VALUE_DOMAIN_PERMISSIBLE_VALUE, DSL.name("value_domain_permissible_valu_value_domain_scoped_identifi_fkey"), new TableField[] { ValueDomainPermissibleValue.VALUE_DOMAIN_PERMISSIBLE_VALUE.VALUE_DOMAIN_SCOPED_IDENTIFIER_ID }, Keys.SCOPED_IDENTIFIER_PKEY, new TableField[] { ScopedIdentifier.SCOPED_IDENTIFIER.ID }, true);
+    public static final ForeignKey<ValueDomainReferenceRecord, CodeSystemRecord> VALUE_DOMAIN_REFERENCE__CODE_SYSTEM_ID_FKEY = Internal.createForeignKey(ValueDomainReference.VALUE_DOMAIN_REFERENCE, DSL.name("code_system_id_fkey"), new TableField[] { ValueDomainReference.VALUE_DOMAIN_REFERENCE.CODE_SYSTEM_ID }, Keys.CODE_SYSTEM_PKEY, new TableField[] { CodeSystem.CODE_SYSTEM.ID }, true);
 }
