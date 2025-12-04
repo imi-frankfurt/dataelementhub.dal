@@ -45,10 +45,6 @@ public enum ValidationType implements EnumType {
 
     TBD("TBD"),
 
-    DEFINED_PERMISSIBLE_VALUE("DEFINED_PERMISSIBLE_VALUE"),
-
-    DEFINED_PERMITTED_VALUEE("DEFINED_PERMITTED_VALUEE"),
-
     DEFINED_PERMITTED_VALUES("DEFINED_PERMITTED_VALUES");
 
     private final String literal;
