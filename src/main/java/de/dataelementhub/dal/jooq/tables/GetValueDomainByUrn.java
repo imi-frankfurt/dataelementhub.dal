@@ -12,12 +12,12 @@ import de.dataelementhub.dal.jooq.tables.records.GetValueDomainByUrnRecord;
 import java.util.function.Function;
 
 import org.jooq.Field;
-import org.jooq.Function19;
+import org.jooq.Function20;
 import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Records;
-import org.jooq.Row19;
+import org.jooq.Row20;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -146,6 +146,12 @@ public class GetValueDomainByUrn extends TableImpl<GetValueDomainByUrnRecord> {
      */
     public final TableField<GetValueDomainByUrnRecord, String> EXTERNAL_ID = createField(DSL.name("external_id"), SQLDataType.CLOB, this, "");
 
+    /**
+     * The column
+     * <code>public.get_value_domain_by_urn.defined_permitted_value</code>.
+     */
+    public final TableField<GetValueDomainByUrnRecord, String> DEFINED_PERMITTED_VALUE = createField(DSL.name("defined_permitted_value"), SQLDataType.CLOB, this, "");
+
     private GetValueDomainByUrn(Name alias, Table<GetValueDomainByUrnRecord> aliased) {
         this(alias, aliased, new Field[] {
             DSL.val(null, SQLDataType.CLOB)
@@ -229,12 +235,12 @@ public class GetValueDomainByUrn extends TableImpl<GetValueDomainByUrnRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row19 type methods
+    // Row20 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row19<Integer, ElementType, Boolean, Integer, Integer, Integer, String, Boolean, String, String, String, Integer, String, ValidationType, String, String, JSON, java.util.UUID, String> fieldsRow() {
-        return (Row19) super.fieldsRow();
+    public Row20<Integer, ElementType, Boolean, Integer, Integer, Integer, String, Boolean, String, String, String, Integer, String, ValidationType, String, String, JSON, java.util.UUID, String, String> fieldsRow() {
+        return (Row20) super.fieldsRow();
     }
 
     /**
@@ -266,14 +272,14 @@ public class GetValueDomainByUrn extends TableImpl<GetValueDomainByUrnRecord> {
     /**
      * Convenience mapping calling {@link #convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function19<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function20<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
     /**
      * Convenience mapping calling {@link #convertFrom(Class, Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function19<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function20<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

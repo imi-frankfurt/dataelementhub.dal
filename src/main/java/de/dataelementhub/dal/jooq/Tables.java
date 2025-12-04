@@ -4,6 +4,7 @@
 package de.dataelementhub.dal.jooq;
 
 
+import de.dataelementhub.dal.jooq.tables.CodeSystem;
 import de.dataelementhub.dal.jooq.tables.ConceptElementAssociations;
 import de.dataelementhub.dal.jooq.tables.Concepts;
 import de.dataelementhub.dal.jooq.tables.Config;
@@ -28,7 +29,9 @@ import de.dataelementhub.dal.jooq.tables.Source;
 import de.dataelementhub.dal.jooq.tables.Staging;
 import de.dataelementhub.dal.jooq.tables.UserNamespaceAccess;
 import de.dataelementhub.dal.jooq.tables.UserSourceCredentials;
+import de.dataelementhub.dal.jooq.tables.ValueDomainDefinedPermissibleValue;
 import de.dataelementhub.dal.jooq.tables.ValueDomainPermissibleValue;
+import de.dataelementhub.dal.jooq.tables.ValueDomainReference;
 import de.dataelementhub.dal.jooq.tables.records.GetDefinitionByUrnRecord;
 import de.dataelementhub.dal.jooq.tables.records.GetScopedIdentifierByUrnRecord;
 import de.dataelementhub.dal.jooq.tables.records.GetSlotByUrnRecord;
@@ -45,6 +48,11 @@ import org.jooq.Result;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>public.code_system</code>.
+     */
+    public static final CodeSystem CODE_SYSTEM = CodeSystem.CODE_SYSTEM;
 
     /**
      * The table <code>public.concept_element_associations</code>.
@@ -343,7 +351,17 @@ public class Tables {
     public static final UserSourceCredentials USER_SOURCE_CREDENTIALS = UserSourceCredentials.USER_SOURCE_CREDENTIALS;
 
     /**
+     * The table <code>public.value_domain_defined_permissible_value</code>.
+     */
+    public static final ValueDomainDefinedPermissibleValue VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE = ValueDomainDefinedPermissibleValue.VALUE_DOMAIN_DEFINED_PERMISSIBLE_VALUE;
+
+    /**
      * The table <code>public.value_domain_permissible_value</code>.
      */
     public static final ValueDomainPermissibleValue VALUE_DOMAIN_PERMISSIBLE_VALUE = ValueDomainPermissibleValue.VALUE_DOMAIN_PERMISSIBLE_VALUE;
+
+    /**
+     * The table <code>public.value_domain_reference</code>.
+     */
+    public static final ValueDomainReference VALUE_DOMAIN_REFERENCE = ValueDomainReference.VALUE_DOMAIN_REFERENCE;
 }

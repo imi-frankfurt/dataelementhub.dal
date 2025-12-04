@@ -22,6 +22,7 @@ public class Source implements Serializable {
     private String prefix;
     private String baseUrl;
     private SourceType type;
+    private String organization;
 
     public Source() {}
 
@@ -31,6 +32,7 @@ public class Source implements Serializable {
         this.prefix = value.prefix;
         this.baseUrl = value.baseUrl;
         this.type = value.type;
+        this.organization = value.organization;
     }
 
     public Source(
@@ -38,13 +40,15 @@ public class Source implements Serializable {
         String name,
         String prefix,
         String baseUrl,
-        SourceType type
+        SourceType type,
+        String organization
     ) {
         this.id = id;
         this.name = name;
         this.prefix = prefix;
         this.baseUrl = baseUrl;
         this.type = type;
+        this.organization = organization;
     }
 
     /**
@@ -117,6 +121,20 @@ public class Source implements Serializable {
         this.type = type;
     }
 
+    /**
+     * Getter for <code>public.source.organization</code>.
+     */
+    public String getOrganization() {
+        return this.organization;
+    }
+
+    /**
+     * Setter for <code>public.source.organization</code>.
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -156,6 +174,12 @@ public class Source implements Serializable {
         }
         else if (!this.type.equals(other.type))
             return false;
+        if (this.organization == null) {
+            if (other.organization != null)
+                return false;
+        }
+        else if (!this.organization.equals(other.organization))
+            return false;
         return true;
     }
 
@@ -168,6 +192,7 @@ public class Source implements Serializable {
         result = prime * result + ((this.prefix == null) ? 0 : this.prefix.hashCode());
         result = prime * result + ((this.baseUrl == null) ? 0 : this.baseUrl.hashCode());
         result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
+        result = prime * result + ((this.organization == null) ? 0 : this.organization.hashCode());
         return result;
     }
 
@@ -180,6 +205,7 @@ public class Source implements Serializable {
         sb.append(", ").append(prefix);
         sb.append(", ").append(baseUrl);
         sb.append(", ").append(type);
+        sb.append(", ").append(organization);
 
         sb.append(")");
         return sb.toString();

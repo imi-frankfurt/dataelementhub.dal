@@ -43,7 +43,9 @@ public enum ValidationType implements EnumType {
 
     LUA("LUA"),
 
-    TBD("TBD");
+    TBD("TBD"),
+
+    DEFINED_PERMITTED_VALUES("DEFINED_PERMITTED_VALUES");
 
     private final String literal;
 

@@ -18,14 +18,14 @@ import java.util.function.Function;
 import org.jooq.Check;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function19;
+import org.jooq.Function20;
 import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row19;
+import org.jooq.Row20;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -154,6 +154,11 @@ public class Element extends TableImpl<ElementRecord> {
      */
     public final TableField<ElementRecord, String> EXTERNAL_ID = createField(DSL.name("external_id"), SQLDataType.CLOB, this, "");
 
+    /**
+     * The column <code>public.element.defined_permitted_value</code>.
+     */
+    public final TableField<ElementRecord, String> DEFINED_PERMITTED_VALUE = createField(DSL.name("defined_permitted_value"), SQLDataType.CLOB, this, "");
+
     private Element(Name alias, Table<ElementRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -253,6 +258,7 @@ public class Element extends TableImpl<ElementRecord> {
             Internal.createCheck(this, DSL.name("catalog_check"), "(((element_type <> 'CATALOG_VALUE_DOMAIN'::element_type) OR ((format IS NOT NULL) AND (datatype IS NOT NULL) AND (maximum_characters IS NOT NULL) AND (scoped_identifier_id IS NOT NULL))))", true),
             Internal.createCheck(this, DSL.name("code_check"), "(((element_type <> 'CODE'::element_type) OR ((code IS NOT NULL) AND (is_valid IS NOT NULL) AND (element_id IS NOT NULL))))", true),
             Internal.createCheck(this, DSL.name("de_check"), "(((element_type <> 'DATAELEMENT'::element_type) OR (element_id IS NOT NULL)))", true),
+            Internal.createCheck(this, DSL.name("defined_check"), "(((element_type <> 'DEFINED_VALUE_DOMAIN'::element_type) OR ((format IS NOT NULL) AND (datatype IS NOT NULL) AND (maximum_characters IS NOT NULL))))", true),
             Internal.createCheck(this, DSL.name("desc_check"), "(((element_type <> 'DESCRIBED_VALUE_DOMAIN'::element_type) OR ((format IS NOT NULL) AND (datatype IS NOT NULL) AND (maximum_characters IS NOT NULL) AND (validation_type IS NOT NULL))))", true),
             Internal.createCheck(this, DSL.name("enu_check"), "(((element_type <> 'ENUMERATED_VALUE_DOMAIN'::element_type) OR ((format IS NOT NULL) AND (datatype IS NOT NULL) AND (maximum_characters IS NOT NULL))))", true)
         );
@@ -298,25 +304,25 @@ public class Element extends TableImpl<ElementRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row19 type methods
+    // Row20 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row19<Integer, ElementType, Boolean, Integer, Integer, Integer, String, Boolean, String, String, String, Integer, String, ValidationType, String, String, JSON, java.util.UUID, String> fieldsRow() {
-        return (Row19) super.fieldsRow();
+    public Row20<Integer, ElementType, Boolean, Integer, Integer, Integer, String, Boolean, String, String, String, Integer, String, ValidationType, String, String, JSON, java.util.UUID, String, String> fieldsRow() {
+        return (Row20) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link #convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function19<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function20<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
     /**
      * Convenience mapping calling {@link #convertFrom(Class, Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function19<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function20<? super Integer, ? super ElementType, ? super Boolean, ? super Integer, ? super Integer, ? super Integer, ? super String, ? super Boolean, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? super ValidationType, ? super String, ? super String, ? super JSON, ? super java.util.UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

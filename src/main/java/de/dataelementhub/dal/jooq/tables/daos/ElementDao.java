@@ -341,4 +341,19 @@ public class ElementDao extends DAOImpl<ElementRecord, de.dataelementhub.dal.joo
     public List<de.dataelementhub.dal.jooq.tables.pojos.Element> fetchByExternalId(String... values) {
         return fetch(Element.ELEMENT.EXTERNAL_ID, values);
     }
+
+    /**
+     * Fetch records that have <code>defined_permitted_value BETWEEN
+     * lowerInclusive AND upperInclusive</code>
+     */
+    public List<de.dataelementhub.dal.jooq.tables.pojos.Element> fetchRangeOfDefinedPermittedValue(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Element.ELEMENT.DEFINED_PERMITTED_VALUE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>defined_permitted_value IN (values)</code>
+     */
+    public List<de.dataelementhub.dal.jooq.tables.pojos.Element> fetchByDefinedPermittedValue(String... values) {
+        return fetch(Element.ELEMENT.DEFINED_PERMITTED_VALUE, values);
+    }
 }

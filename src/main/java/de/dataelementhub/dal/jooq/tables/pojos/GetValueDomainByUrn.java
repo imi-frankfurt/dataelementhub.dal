@@ -40,6 +40,7 @@ public class GetValueDomainByUrn implements Serializable {
     private JSON data;
     private UUID uuid;
     private String externalId;
+    private String definedPermittedValue;
 
     public GetValueDomainByUrn() {}
 
@@ -63,6 +64,7 @@ public class GetValueDomainByUrn implements Serializable {
         this.data = value.data;
         this.uuid = value.uuid;
         this.externalId = value.externalId;
+        this.definedPermittedValue = value.definedPermittedValue;
     }
 
     public GetValueDomainByUrn(
@@ -84,7 +86,8 @@ public class GetValueDomainByUrn implements Serializable {
         String permittedValue,
         JSON data,
         UUID uuid,
-        String externalId
+        String externalId,
+        String definedPermittedValue
     ) {
         this.id = id;
         this.elementType = elementType;
@@ -105,6 +108,7 @@ public class GetValueDomainByUrn implements Serializable {
         this.data = data;
         this.uuid = uuid;
         this.externalId = externalId;
+        this.definedPermittedValue = definedPermittedValue;
     }
 
     /**
@@ -377,6 +381,22 @@ public class GetValueDomainByUrn implements Serializable {
         this.externalId = externalId;
     }
 
+    /**
+     * Getter for
+     * <code>public.get_value_domain_by_urn.defined_permitted_value</code>.
+     */
+    public String getDefinedPermittedValue() {
+        return this.definedPermittedValue;
+    }
+
+    /**
+     * Setter for
+     * <code>public.get_value_domain_by_urn.defined_permitted_value</code>.
+     */
+    public void setDefinedPermittedValue(String definedPermittedValue) {
+        this.definedPermittedValue = definedPermittedValue;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -500,6 +520,12 @@ public class GetValueDomainByUrn implements Serializable {
         }
         else if (!this.externalId.equals(other.externalId))
             return false;
+        if (this.definedPermittedValue == null) {
+            if (other.definedPermittedValue != null)
+                return false;
+        }
+        else if (!this.definedPermittedValue.equals(other.definedPermittedValue))
+            return false;
         return true;
     }
 
@@ -526,6 +552,7 @@ public class GetValueDomainByUrn implements Serializable {
         result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
         result = prime * result + ((this.uuid == null) ? 0 : this.uuid.hashCode());
         result = prime * result + ((this.externalId == null) ? 0 : this.externalId.hashCode());
+        result = prime * result + ((this.definedPermittedValue == null) ? 0 : this.definedPermittedValue.hashCode());
         return result;
     }
 
@@ -552,6 +579,7 @@ public class GetValueDomainByUrn implements Serializable {
         sb.append(", ").append(data);
         sb.append(", ").append(uuid);
         sb.append(", ").append(externalId);
+        sb.append(", ").append(definedPermittedValue);
 
         sb.append(")");
         return sb.toString();

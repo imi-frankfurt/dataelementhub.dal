@@ -359,6 +359,22 @@ public class IdentifiedElementRecord extends TableRecordImpl<IdentifiedElementRe
         return (String) get(23);
     }
 
+    /**
+     * Setter for
+     * <code>public.identified_element.defined_permitted_value</code>.
+     */
+    public void setDefinedPermittedValue(String value) {
+        set(24, value);
+    }
+
+    /**
+     * Getter for
+     * <code>public.identified_element.defined_permitted_value</code>.
+     */
+    public String getDefinedPermittedValue() {
+        return (String) get(24);
+    }
+
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -373,7 +389,7 @@ public class IdentifiedElementRecord extends TableRecordImpl<IdentifiedElementRe
     /**
      * Create a detached, initialised IdentifiedElementRecord
      */
-    public IdentifiedElementRecord(Integer siId, Integer siIdentifier, Integer siVersion, Status siStatus, Integer siNamespaceId, Integer id, ElementType elementType, Boolean hidden, Integer createdBy, Integer elementId, Integer scopedIdentifierId, String code, Boolean isValid, String format, String datatype, String unitOfMeasure, Integer maximumCharacters, String description, ValidationType validationType, String validationData, String permittedValue, JSON data, UUID uuid, String externalId) {
+    public IdentifiedElementRecord(Integer siId, Integer siIdentifier, Integer siVersion, Status siStatus, Integer siNamespaceId, Integer id, ElementType elementType, Boolean hidden, Integer createdBy, Integer elementId, Integer scopedIdentifierId, String code, Boolean isValid, String format, String datatype, String unitOfMeasure, Integer maximumCharacters, String description, ValidationType validationType, String validationData, String permittedValue, JSON data, UUID uuid, String externalId, String definedPermittedValue) {
         super(IdentifiedElement.IDENTIFIED_ELEMENT);
 
         setSiId(siId);
@@ -400,6 +416,7 @@ public class IdentifiedElementRecord extends TableRecordImpl<IdentifiedElementRe
         setData(data);
         setUuid(uuid);
         setExternalId(externalId);
+        setDefinedPermittedValue(definedPermittedValue);
     }
 
     /**
@@ -433,6 +450,7 @@ public class IdentifiedElementRecord extends TableRecordImpl<IdentifiedElementRe
             setData(value.getData());
             setUuid(value.getUuid());
             setExternalId(value.getExternalId());
+            setDefinedPermittedValue(value.getDefinedPermittedValue());
         }
     }
 }

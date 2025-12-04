@@ -170,4 +170,19 @@ public class SourceDao extends DAOImpl<SourceRecord, de.dataelementhub.dal.jooq.
     public List<de.dataelementhub.dal.jooq.tables.pojos.Source> fetchByType(SourceType... values) {
         return fetch(Source.SOURCE.TYPE, values);
     }
+
+    /**
+     * Fetch records that have <code>organization BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<de.dataelementhub.dal.jooq.tables.pojos.Source> fetchRangeOfOrganization(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Source.SOURCE.ORGANIZATION, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>organization IN (values)</code>
+     */
+    public List<de.dataelementhub.dal.jooq.tables.pojos.Source> fetchByOrganization(String... values) {
+        return fetch(Source.SOURCE.ORGANIZATION, values);
+    }
 }
